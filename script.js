@@ -32,7 +32,9 @@ function initializeWheel(options) {
     for (let i = 0; i < numSegments; i++) {
         const startAngle = i * anglePerSegment;
         const endAngle = (i + 1) * anglePerSegment;
+        const middleAngle = startAngle + (anglePerSegment / 2);
 
+        // Draw segment
         ctx.beginPath();
         ctx.moveTo(canvasCenter, canvasCenter);
         ctx.arc(canvasCenter, canvasCenter, radius, startAngle, endAngle);
@@ -40,6 +42,17 @@ function initializeWheel(options) {
         ctx.fillStyle = colors[i % 2];
         ctx.fill();
         ctx.stroke();
+
+        // Draw text
+        ctx.save();
+        ctx.translate(canvasCenter, canvasCenter);
+        ctx.rotate(middleAngle);
+        ctx.fillStyle = '#000';
+        ctx.font = '18px Open Sans';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(options[i], radius / 2, 0);  // Adjust position as needed
+        ctx.restore();
     }
 }
 
