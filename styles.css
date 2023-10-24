@@ -7,11 +7,6 @@ body {
     padding: 0;
 }
 
-#loading {
-    text-align: center;
-    font-size: 24px;
-}
-
 #container {
     text-align: center;
     margin-top: 50px;
@@ -22,7 +17,7 @@ body {
 }
 
 #spinButton {
-    background-color: rgb(255, 255, 255);
+    background-color: pink;
     border: none;
     padding: 10px 20px;
     font-size: 18px;
@@ -31,7 +26,6 @@ body {
 
 #result {
     margin-top: 20px;
-    font-size: 24px;
 }
 
 .hidden {

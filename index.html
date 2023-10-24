@@ -6,21 +6,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="container">
         <div id="wheel-container">
-            <canvas id="wheelCanvas" width="400" height="400"></canvas>
+            <canvas id="wheelCanvas"></canvas>
         </div>
-        
-        <div id="loading">Loading...</div>
-        
         <div id="controls">
             <button id="spinButton" disabled>Spin</button>
         </div>
-        
-        <div id="result" class="hidden">Result: <span id="result-text"></span></div>
+        <div id="result" class="hidden">
+            <p id="result-text"></p>
+        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
