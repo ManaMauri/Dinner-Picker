@@ -27,8 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeWheel(options) {
     const canvas = document.getElementById('wheelCanvas');
     const ctx = canvas.getContext('2d');
+
+    // Scale up the canvas dimensions for mobile phones
+    const isMobile = window.innerWidth <= 800;
+    const scaleFactor = isMobile ? 2 : 1;
+    canvas.width = 400 * scaleFactor;
+    canvas.height = 400 * scaleFactor;
+
     const canvasCenter = canvas.width / 2;
-    const radius = canvasCenter - 10;
+    let radius = canvasCenter - 10;
+
+    // Calculate the maximum text length
+    ctx.font = `${18 * scaleFactor}px Open Sans`;
+    const maxTextLength = Math.max(...options.map(option => ctx.measureText(option).width));
+
+    // Adjust the radius based on the maximum text length
+    radius -= (maxTextLength / 2 + 10);  // 10 is the margin
 
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -61,13 +75,14 @@ function initializeWheel(options) {
         ctx.translate(canvasCenter, canvasCenter);
         ctx.rotate(middleAngle);
         ctx.fillStyle = '#000';
-        ctx.font = '18px Open Sans';
+        ctx.font = `${18 * scaleFactor}px Open Sans`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(options[i], radius / 2, 0);
+        ctx.fillText(options[i], (radius / 2) + 10, 0);  // Add margin to the text
         ctx.restore();
     }
 }
+
 
 function spinWheel(options) {
     const numSegments = options.length;
