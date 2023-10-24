@@ -2,8 +2,8 @@ let options = [];
 let currentRotation = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Show loading message
-    document.getElementById('loading').style.display = 'block';
+    // Optional: Show loading message if you have an element with id 'loading' in your HTML
+    // document.getElementById('loading').style.display = 'block';
 
     // Fetch options from Google Spreadsheet
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRvIjlDiuwZaZV8yrbj4fR2YIypZNzGkaxQ_mUX580Pxi3zCcmy0kV7ID15fokd4KahyJIYwXa4qF_8/pub?gid=0&single=true&output=csv")
@@ -12,9 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         options = data.split("\n").slice(1);  // Skip header
         initializeWheel(options);
 
-        // Hide loading message and enable the spin button
-        document.getElementById('loading').style.display = 'none';
+        // Optional: Hide loading message and enable the spin button
+        // document.getElementById('loading').style.display = 'none';
         document.getElementById('spinButton').disabled = false;
+    })
+    .catch(error => {
+        console.error("Failed to fetch options: ", error);
     });
 
     // Spin button click event
