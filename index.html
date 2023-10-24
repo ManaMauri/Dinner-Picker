@@ -4,7 +4,6 @@
     <title>Picker Wheel</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -13,9 +12,12 @@
             <canvas id="wheelCanvas" width="400" height="400"></canvas>
         </div>
         
+        <div id="loading">Loading...</div>
+        
         <div id="controls">
-            <button id="spinButton">Spin</button>
+            <button id="spinButton" disabled>Spin</button>
         </div>
+        
         <div id="result" class="hidden">Result: <span id="result-text"></span></div>
     </div>
 

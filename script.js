@@ -2,12 +2,19 @@ let options = [];
 let currentRotation = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Show loading message
+    document.getElementById('loading').style.display = 'block';
+
     // Fetch options from Google Spreadsheet
     fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRvIjlDiuwZaZV8yrbj4fR2YIypZNzGkaxQ_mUX580Pxi3zCcmy0kV7ID15fokd4KahyJIYwXa4qF_8/pub?gid=0&single=true&output=csv")
     .then(response => response.text())
     .then(data => {
         options = data.split("\n").slice(1);  // Skip header
         initializeWheel(options);
+
+        // Hide loading message and enable the spin button
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('spinButton').disabled = false;
     });
 
     // Spin button click event
@@ -38,6 +45,7 @@ function initializeWheel(options) {
     for (let i = 0; i < numSegments; i++) {
         const startAngle = i * anglePerSegment;
         const endAngle = (i + 1) * anglePerSegment;
+        const middleAngle = startAngle + (anglePerSegment / 2);
 
         // Draw segment
         ctx.beginPath();
@@ -49,14 +57,15 @@ function initializeWheel(options) {
         ctx.stroke();
 
         // Draw text
-        const angle = startAngle + (anglePerSegment / 2);
-        const x = canvasCenter + (radius * 0.5 * Math.cos(angle));
-        const y = canvasCenter + (radius * 0.5 * Math.sin(angle));
+        ctx.save();
+        ctx.translate(canvasCenter, canvasCenter);
+        ctx.rotate(middleAngle);
         ctx.fillStyle = '#000';
         ctx.font = '18px Open Sans';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(options[i], x, y);
+        ctx.fillText(options[i], radius / 2, 0);
+        ctx.restore();
     }
 }
 
