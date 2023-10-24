@@ -27,16 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeWheel(options) {
     const canvas = document.getElementById('wheelCanvas');
     const ctx = canvas.getContext('2d');
-    
+
     // Measure the longest text among options
     ctx.font = '18px Open Sans';
     const maxTextWidth = Math.max(...options.map(text => ctx.measureText(text).width));
-    
+
     // Calculate canvas dimensions and circle radius based on the longest text
     const extraSpace = 20; // Additional space for text margin and stroke line
     const canvasSize = 2 * (maxTextWidth + extraSpace);
     const radius = canvasSize / 2 - extraSpace;
-    
+
     canvas.width = canvasSize;
     canvas.height = canvasSize;
     const canvasCenter = canvasSize / 2;
@@ -44,10 +44,8 @@ function initializeWheel(options) {
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw circle
-    ctx.beginPath();
-    ctx.arc(canvasCenter, canvasCenter, radius, 0, 2 * Math.PI);
-    ctx.stroke();
+    // Define colors for segments
+    const colors = ['#FF0000', '#00FF00'];  // Your choice of two colors
 
     // Draw segments
     const numSegments = options.length;
@@ -63,7 +61,7 @@ function initializeWheel(options) {
         ctx.moveTo(canvasCenter, canvasCenter);
         ctx.arc(canvasCenter, canvasCenter, radius, startAngle, endAngle);
         ctx.lineTo(canvasCenter, canvasCenter);
-        ctx.fillStyle = (i % 2 === 0) ? '#FFC0CB' : '#FF69B4';  // Shades of pink
+        ctx.fillStyle = colors[i % 2];  // Alternate between the two colors
         ctx.fill();
         ctx.stroke();
 
@@ -72,14 +70,13 @@ function initializeWheel(options) {
         ctx.translate(canvasCenter, canvasCenter);
         ctx.rotate(middleAngle);
         ctx.fillStyle = '#000';
-        ctx.font = `${18 * scaleFactor}px Open Sans`;
-        ctx.textAlign = 'center';
+        ctx.font = '18px Open Sans';
+        ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
         ctx.fillText(options[i], (radius / 2) + 10, 0);  // Add margin to the text
         ctx.restore();
     }
 }
-
 
 function spinWheel(options) {
     const numSegments = options.length;
