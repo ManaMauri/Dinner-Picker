@@ -1,0 +1,16 @@
+#container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#wheel-container {
+    position: relative;
+}
+
+#controls {
+    margin-top: 20px;
+}
+
+#optionsList {
+    margin-top: 20px;
+}
