@@ -3,6 +3,7 @@
 <head>
     <title>Picker Wheel</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 <body>
@@ -14,12 +15,13 @@
         
         <div id="controls">
             <button id="spinButton">Spin</button>
-            <button id="loadFileButton">Load Excel File</button>
-            <input type="file" id="excelFileInput" accept=".xlsx" style="display:none;">
         </div>
-        
-        <div id="optionsList">
-            <!-- List of options will appear here -->
+    </div>
+
+    <div id="popup" class="hidden">
+        <div id="popup-content">
+            <span id="popup-close">&times;</span>
+            <p id="popup-message"></p>
         </div>
     </div>
 
