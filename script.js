@@ -27,22 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeWheel(options) {
     const canvas = document.getElementById('wheelCanvas');
     const ctx = canvas.getContext('2d');
-
-    // Scale up the canvas dimensions for mobile phones
-    const isMobile = window.innerWidth <= 800;
-    const scaleFactor = isMobile ? 2 : 1;
-    canvas.width = 400 * scaleFactor;
-    canvas.height = 400 * scaleFactor;
-
-    const canvasCenter = canvas.width / 2;
-    let radius = canvasCenter - 10;
-
-    // Calculate the maximum text length
-    ctx.font = `${18 * scaleFactor}px Open Sans`;
-    const maxTextLength = Math.max(...options.map(option => ctx.measureText(option).width));
-
-    // Adjust the radius based on the maximum text length
-    radius -= (maxTextLength / 2 + 10);  // 10 is the margin
+    
+    // Measure the longest text among options
+    ctx.font = '18px Open Sans';
+    const maxTextWidth = Math.max(...options.map(text => ctx.measureText(text).width));
+    
+    // Calculate canvas dimensions and circle radius based on the longest text
+    const extraSpace = 20; // Additional space for text margin and stroke line
+    const canvasSize = 2 * (maxTextWidth + extraSpace);
+    const radius = canvasSize / 2 - extraSpace;
+    
+    canvas.width = canvasSize;
+    canvas.height = canvasSize;
+    const canvasCenter = canvasSize / 2;
 
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
